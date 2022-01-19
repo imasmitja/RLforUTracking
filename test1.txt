@@ -34,7 +34,7 @@ noise_reduction = 0.9999
 # PRETRINED NETWORK
 ##################################################################
 #Use a previouse trained network as imput weights    
-PRE_TRAINED = True    
+PRE_TRAINED = False   
 PRE_TRAINED_EP = 0
 
 
@@ -42,20 +42,22 @@ PRE_TRAINED_EP = 0
 # SCENARIO
 ##################################################################
 #Scenario used to train the networks
-#SCENARIO = simple_spread_ivan 
-#SCENARIO = simple_track_ivan
-SCENARIO = simple_track_ivan_6
-#SCENARIO = dynamic_track_ivan(linear) 
-#SCENARIO = dynamic_track_ivan  
+SCENARIO = tracking
+
 
 #Number of parallel agents
 parallel_envs = 8
 #Number of agents per environment
-num_agents = 2
+num_agents = 1
 #Number of landmarks (or targets) per environment
 num_landmarks = 1
 #Depth of each landmark (in metres)
 landmark_depth = 15.0
+landmark_movable = True
+movement = linear
+pf_method = True
+rew_err_th = 0.0003
+rew_dis_th = 0.3
 #Number of training episodes.
 #Change this to higher number to experiment. say 30000.
 number_of_episodes = 4000000
@@ -82,9 +84,9 @@ HISTORY_LENGTH = 5
 
 #Number of units per layers
 #it was 64 or 128
-DIM_1 = 128 
+DIM_1 = 64 
 #it was 32 or 128
-DIM_2 = 128 
+DIM_2 = 32 
 
 #Uniform random steps at the begining as suggested by https://spinningup.openai.com/en/latest/algorithms/ddpg.html
 START_STEPS = 10000 
