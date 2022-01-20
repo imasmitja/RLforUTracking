@@ -16,20 +16,13 @@ The main objective is to find the optimal path that an autonomous vehicle (e.g. 
 
 An example of a trained agent can be seen below.
 
-<img src="https://github.com/imasmitja/DRL4AUV/trained_saca.gif" width="200" height="200"/>
-<img src="https://github.com/imasmitja/DRL4AUV/trained_sacc.gif" width="200" height="200"/>
-
-## Simple spread env
-This algorithm has been used to solve the simple spread (Cooperative navigation) environment from OpenAI [link](https://github.com/openai/multiagent-particle-envs). N agents, N landmarks. Agents are rewarded based on how far any agent is from each landmark. Agents are penalized if they collide with other agents. So, agents have to learn to cover all the landmarks while avoiding collisions. However, I modified part of the reward function to be able to increase the training performance (i.e. the agents receive +10 if they are near a landmark).
-
-
-
-The observation space consists of 18 variables (for 3 agents and 3 landmarks): X-Y positions of each landmark, X-Y positions other agents, and X-Y position and X-Y velocities of itself, plus 2 communication of all other agents. Each agent receives its own, local observation. Two continuous cations are available, corresponding to movements of X and Y. The reward of each agent is shared in order to have a cooperative behaviour.
+<img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_saca.gif" width="200" height="200"/>
+<img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_sacc.gif" width="200" height="200"/>
 
 ## Instructions
-I have followed the next steps to set up my Windows computer to run the algorithms:
+Follow the next instructions to set up a Windows computer to run the algorithms.
 
-- conda create -n <env-name> python=3.6
+- conda create -n \<env-name\> python=3.6
 - conda activate <env-name>
 - conda install git
 - conda install -c conda-forge ffmpeg
