@@ -2,9 +2,9 @@
 # policy + critic updates
 # see ddpg.py for other details in the network
 
-from sac import SACAgent
+from algorithms.sac.sac import SACAgent
 import torch
-from utilities import soft_update, transpose_to_tensor, transpose_list, gumbel_softmax
+from utilities.utilities import soft_update, transpose_to_tensor, transpose_list, gumbel_softmax
 import numpy as np
 
 '''

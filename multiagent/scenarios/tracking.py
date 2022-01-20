@@ -1,8 +1,8 @@
 import numpy as np
 from multiagent.core import World, Agent, Landmark
 from multiagent.scenario import BaseScenario
-from target_pf import Target
-from utilities import random_levy
+from tracking.target_pf import Target
+from utilities.utilities import random_levy
 
 
 class Scenario(BaseScenario):

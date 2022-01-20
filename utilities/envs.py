@@ -1,4 +1,4 @@
-from env_wrapper import SubprocVecEnv, DummyVecEnv
+from utilities.env_wrapper import SubprocVecEnv, DummyVecEnv
 import numpy as np
 import multiagent.scenarios as scenarios
 from multiagent.environment import MultiAgentEnv

@@ -7,6 +7,7 @@ from multiagent.multi_discrete import MultiDiscrete
 #global
 old_entity = 0
 CONTINUE_PLOT = True
+gym.logger.set_level(40)
 
 # environment for all agents in the multiagent world
 # currently code assumes that no agents will be created/destroyed at runtime!

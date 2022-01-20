@@ -1,0 +1,117 @@
+[hyperparam]
+
+##################################################################
+# HYPERPARAMETERS
+##################################################################
+#Replay buffer size: int(1e6) 
+BUFFER_SIZE = 500000 
+#Mini batch size: 512  
+BATCH_SIZE = 32
+#Discount factor: 0.95            
+GAMMA = 0.99
+#For soft update of target parameters          
+TAU = 0.01
+#Learning rate of the actor      
+LR_ACTOR = 1e-3
+#Learning rate of the critic     
+LR_CRITIC = 1e-4
+#L2 weight decay: 1e-5     
+WEIGHT_DECAY = 0 
+#How many steps to take before updating target networks            
+UPDATE_EVERY = 30
+#Number of times we update the networks       
+UPDATE_TIMES = 20
+#Seed for random numbers       
+SEED = 3 
+
+#Amplitude of OU noise
+#This slowly decreases to 0
+#Was 2, try 0.5
+noise = 0.5 
+noise_reduction = 0.9999
+
+##################################################################
+# PRETRINED NETWORK
+##################################################################
+#Use a previouse trained network as imput weights    
+PRE_TRAINED = True   
+PRE_TRAINED_EP = 0
+
+
+##################################################################
+# SCENARIO
+##################################################################
+#Scenario used to train the networks
+SCENARIO = tracking
+
+
+#Number of parallel agents
+parallel_envs = 8
+#Number of agents per environment
+num_agents = 1
+#Number of landmarks (or targets) per environment
+num_landmarks = 1
+#Depth of each landmark (in metres)
+landmark_depth = 15.0
+landmark_movable = False
+movement = linear
+#movement = random
+#movement = levy
+pf_method = False
+rew_err_th = 0.0003
+rew_dis_th = 0.3
+#Number of training episodes.
+#Change this to higher number to experiment. say 30000.
+number_of_episodes = 4000000
+episode_length = 200
+
+#Experienced replay buffer activation
+EXP_REP_BUF = False
+
+##################################################################
+# NETWORK ARCHITECTURE
+##################################################################
+#DNN network
+#DNN = MADDPG
+#DNN = MATD3
+DNN = MASAC
+
+#SAC parameters
+ALPHA = 0.05
+AUTOMATIC_ENTROPY = True
+
+#Recurrent neural network
+RNN = False
+HISTORY_LENGTH = 5
+
+#Number of units per layers
+#it was 64 or 128
+DIM_1 = 64 
+#it was 32 or 128
+DIM_2 = 32 
+
+#Uniform random steps at the begining as suggested by https://spinningup.openai.com/en/latest/algorithms/ddpg.html
+START_STEPS = 10000 
+
+##################################################################
+# LOG PARAMETERS
+##################################################################
+#Sliding windows to measure the avarage reward among epochs
+REWARD_WINDOWS = 100000
+#Sliding windows to measure the avarage landmark error among epochs 
+LANDMARK_ERROR_WINDOWS = 10000 
+#Sliding windows to emasure the number of collisions and out of world
+COLLISION_OUTWORLD_WINDOWS = 1000 
+
+#In BSC machines the render doesn't work
+RENDER = False 
+
+#If we want to render the progress bar         
+PROGRESS_BAR = True
+
+#Save benchmark data                
+BENCHMARK = True
+
+#How many episodes to save policy and gif
+save_interval = 100000
+##################################################################

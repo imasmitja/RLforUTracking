@@ -1,4 +1,4 @@
-from utilities import transpose_list
+from utilities.utilities import transpose_list
 import numpy as np
 import random
 from collections import namedtuple, deque

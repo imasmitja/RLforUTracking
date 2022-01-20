@@ -2,9 +2,9 @@
 # policy + critic updates
 # see ddpg.py for other details in the network
 
-from td3_bc import TD3_BCAgent
+from algorithms.td3.td3_bc import TD3_BCAgent
 import torch
-from utilities import soft_update, transpose_to_tensor, transpose_list, gumbel_softmax
+from utilities.utilities import soft_update, transpose_to_tensor, transpose_list, gumbel_softmax
 import numpy as np
 
 

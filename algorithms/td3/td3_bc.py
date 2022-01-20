@@ -8,15 +8,15 @@ An addaption from:
     
 '''
 
-from networkforall_td3 import Network
-from utilities import hard_update, gumbel_softmax, onehot_from_logits
+from algorithms.td3.networkforall_td3 import Network
+from utilities.utilities import hard_update, gumbel_softmax, onehot_from_logits
 from torch.optim import Adam, AdamW
 import torch
 import numpy as np
 
 
 # add OU noise for exploration
-from OUNoise import OUNoise
+from utilities.OUNoise import OUNoise
 
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = 'cpu'

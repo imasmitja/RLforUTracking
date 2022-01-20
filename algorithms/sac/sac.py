@@ -11,15 +11,15 @@ https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/sac.py
 
 '''
 
-from networkforall_sac import Network
-from utilities import hard_update, gumbel_softmax, onehot_from_logits
+from algorithms.sac.networkforall_sac import Network
+from utilities.utilities import hard_update, gumbel_softmax, onehot_from_logits
 from torch.optim import Adam, AdamW
 import torch
 import numpy as np
 
 
 # add OU noise for exploration
-from OUNoise import OUNoise
+from utilities.OUNoise import OUNoise
 
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = 'cpu'

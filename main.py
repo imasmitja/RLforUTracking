@@ -2,16 +2,16 @@
 # perform training loop
 ####################################################################################################
 
-import envs
-from buffer import ReplayBuffer, ReplayBuffer_SummTree
-from maddpg import MADDPG
-from matd3_bc import MATD3_BC
-from masac import MASAC
+from utilities import envs
+from utilities.buffer import ReplayBuffer, ReplayBuffer_SummTree
+from algorithms.ddpg.maddpg import MADDPG
+from algorithms.td3.matd3_bc import MATD3_BC
+from algorithms.sac.masac import MASAC
 import torch
 import numpy as np
 from tensorboardX import SummaryWriter
 import os
-from utilities import transpose_list, transpose_to_tensor
+from utilities.utilities import transpose_list, transpose_to_tensor
 import time
 import copy
 import random
@@ -49,8 +49,7 @@ def main():
     if( len( sys.argv ) > 1 ):
         configFile = sys.argv[1]
     else:
-        configFile = 'tsac_a_lstm_m'
-        # configFile = 'test1'
+        configFile = 'test_configuration'
     print ('Configuration File   =  ',configFile +'.txt')
     
     config = ConfigParser()
