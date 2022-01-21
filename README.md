@@ -60,7 +60,7 @@ An example configuration file can be seen [here](https://github.com/imasmitja/DR
 
 This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
 
-<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="170" height="50"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="142" height="50"/>
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="135" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="121" height="75"/>
 
 “This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 893089.”
 
