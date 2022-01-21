@@ -16,8 +16,7 @@ The main objective is to find the optimal path that an autonomous vehicle (e.g. 
 
 An example of a trained agent can be seen below.
 
-<img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_saca.gif" width="200" height="200"/>
-<img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_sacc.gif" width="200" height="200"/>
+<img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_saca.gif" width="300" height="300"/> <img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_sacc.gif" width="300" height="300"/>
 
 ## Installation Instructions
 Follow the next instructions to set up a Windows computer to run the algorithms.
