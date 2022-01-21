@@ -58,5 +58,5 @@ Run in CMD -> python see_trained_agent.py \<configuration file\>
 An example configuration file can be seen [here](https://github.com/imasmitja/DRL4AUV/blob/main/test_configuration.txt)
 This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
 
-<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="940" height="300"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="275" height="183"/>
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="470" height="150"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="242" height="150"/>
 
