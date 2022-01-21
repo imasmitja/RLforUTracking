@@ -1,4 +1,4 @@
-# DRL4AUV2TRACK
+# Deep Reinforcement Learning for Underwater target Tracking (DRLforUTracking)
 This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
 The Deep Reinforcement Learning (DRL) algorithms implemented are:
@@ -56,6 +56,6 @@ Run in CMD -> python see_trained_agent.py \<configuration file\>
 
 ## Additional information
 An example configuration file can be seen here [link](https://github.com/imasmitja/DRL4AUV/blob/main/test_configuration.txt)
-
+This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship [link](https://cordis.europa.eu/project/id/893089).
 
 
