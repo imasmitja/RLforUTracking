@@ -18,6 +18,8 @@ An example of a trained agent can be seen below.
 
 <img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_saca.gif" width="300" height="300"/> <img src="https://github.com/imasmitja/DRL4AUV/blob/main/trained_sacc.gif" width="300" height="300"/>
 
+Legend: Blue dot = agnet, Black dot = target, and Red dot = predicted target position using LS
+
 ## Installation Instructions
 Follow the next instructions to set up a Windows computer to run the algorithms.
 
