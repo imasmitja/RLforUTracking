@@ -67,9 +67,9 @@ python see_trained_agent.py <configuration file>
 
 Note: <configuration file> without extension
 
-
-## Additional information
 An example of the configuration file can be seen [here](https://github.com/imasmitja/DRL4AUV/blob/main/test_configuration.txt)
+  
+## Additional information
 
 
 This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
