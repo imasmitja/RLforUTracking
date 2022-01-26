@@ -24,8 +24,8 @@ Legend: Blue dot = agnet, Black dot = target, and Red dot = predicted target pos
 Follow the next instructions to set up a Windows computer to run the algorithms.
 
 ```
-conda create -n \<env-name\> python=3.6
-conda activate \<env-name\>
+conda create -n <env-name> python=3.6
+conda activate <env-name>
 conda install git
 conda install -c conda-forge ffmpeg
 pip install gym==0.10.0
