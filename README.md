@@ -44,13 +44,13 @@ conda install matplotlib
 Train the DRL network (Run in CMD) 
 
 ```
-python main.py \<configuration file\>
+python main.py <configuration file>
 ```
 
 While the DRL is training you can visualize the polots on tensorBoard by (Run in CMD):
 
 ```
-tensorboard --logdir=./log/\<configuration file\> --host=127.0.0.1
+tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
 ```
 
 Then (Run in web):
@@ -62,10 +62,10 @@ http://localhost:6006/
 See a trained agent (Run in CMD):
 
 ```
-python see_trained_agent.py \<configuration file\>
+python see_trained_agent.py <configuration file>
 ```
 
-Note: \<configuration file\> without extension
+Note: <configuration file> without extension
 
 
 ## Additional information
