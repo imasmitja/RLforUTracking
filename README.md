@@ -25,33 +25,39 @@ An example of a trained agent can be seen below.
 Follow the next instructions to set up a Windows computer to run the algorithms.
 
 ```
-conda create -n <env-name> python=3.6
-conda activate <env-name>
-conda install git
-conda install -c conda-forge ffmpeg
-pip install gym==0.10.0
-conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
-pip install tensorflow==2.1.0
-pip install tensorboardX
-pip install imageio
-pip install progressbar
-pip install pyglet==1.3.2
-pip install cloudpickle
-pip install tqdm
-conda install matplotlib
+$ conda create -n <env-name> python=3.6
+$ conda activate <env-name>
+$ conda install git
+$ conda install -c conda-forge ffmpeg
+$ pip install gym==0.10.0
+$ conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
+$ pip install tensorflow==2.1.0
+$ pip install tensorboardX
+$ pip install imageio
+$ pip install progressbar
+$ pip install pyglet==1.3.2
+$ pip install cloudpickle
+$ pip install tqdm
+$ conda install matplotlib
+```
+
+Then type `git clone`, and paste the project URL, to clone this repository in your local computer.
+
+```
+$ git clone https://github.com/imasmitja/DRLforUTracking
 ```
 
 ## Execution Instructions
 Train the DRL network (Run in CMD) 
 
 ```
-python main.py <configuration file>
+$ python main.py <configuration file>
 ```
 
 While the DRL is training you can visualize the polots on tensorBoard by (Run in CMD):
 
 ```
-tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
+$ tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
 ```
 
 Then (Run in web):
@@ -63,7 +69,7 @@ http://localhost:6006/
 See a trained agent (Run in CMD):
 
 ```
-python see_trained_agent.py <configuration file>
+$ python see_trained_agent.py <configuration file>
 ```
 
 Note: `<configuration file>` without extension
