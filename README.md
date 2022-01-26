@@ -1,7 +1,7 @@
-# Deep Reinforcement Learning for Underwater target Tracking (DRLforUTracking)
+# Deep Reinforcement Learning for Underwater target Tracking (RLforUTracking)
 This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
-The Deep Reinforcement Learning (DRL) algorithms implemented are:
+The Deep Reinforcement Learning (RL) algorithms implemented are:
 
 - DDPG
 - TD3
