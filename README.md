@@ -80,10 +80,9 @@ This repositori is part of the Artificial Intelligence methods for Underwater ta
 
 
 
-<sub><sup>combining the two tags</sup></sub>
 
 
 <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="121" height="75"/>
 
-“This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 893089.”
+<sub><sup>“This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 893089.”</sup></sub>
 
