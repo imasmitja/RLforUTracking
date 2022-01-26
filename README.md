@@ -48,13 +48,13 @@ $ git clone https://github.com/imasmitja/DRLforUTracking
 ```
 
 ## Execution Instructions
-Train the DRL network (Run in CMD) 
+Train the DRL network:
 
 ```
 $ python main.py <configuration file>
 ```
 
-While the DRL is training you can visualize the polots on tensorBoard by (Run in CMD):
+While the DRL is training you can visualize the polots on tensorBoard by:
 
 ```
 $ tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
@@ -66,7 +66,7 @@ Then (Run in web):
 http://localhost:6006/
 ```
 
-See a trained agent (Run in CMD):
+See a trained agent:
 
 ```
 $ python see_trained_agent.py <configuration file>
