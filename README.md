@@ -65,7 +65,7 @@ An example of the configuration file can be seen [here](https://github.com/imasm
 
 This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
 
-**Acknowledgements** - Anyone using DRLforUTracking data for a publication or project acknowledges and references this [forthcoming] publication.
+**Acknowledgements** - Anyone using DRLforUTracking data for a publication or project acknowledges and references this [forthcoming] (publication).
 
 <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="121" height="75"/>
 
