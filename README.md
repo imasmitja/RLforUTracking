@@ -7,7 +7,7 @@ The Deep Reinforcement Learning (RL) algorithms implemented are:
 - Twin-Delayed DDPG ([TD3](https://spinningup.openai.com/en/latest/algorithms/td3.html))
 - Soft Actor-Critic ([SAC](https://spinningup.openai.com/en/latest/algorithms/sac.html))
 
-The environment to train the agents is based on the OpenAI Particle [link](https://github.com/openai/multiagent-particle-envs).
+The environment to train the agents is based on the [OpenAI Particle](https://github.com/openai/multiagent-particle-envs).
 
 The main objective is to find the optimal path that an autonomous vehicle (e.g. autonomous underwater vehicles (AUV) or autonomous surface vehicles (ASV)) should follow in order to localize and track an underwater target using [range-only and single-beacon algorithms](https://journals.sagepub.com/doi/10.1177/0278364918802351). The target estimation algorithms implemented are based on:
 
