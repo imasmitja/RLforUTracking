@@ -3,7 +3,7 @@ This is a set of tools developed to train an agen (and multiple agents) to find 
 
 The Deep Reinforcement Learning (RL) algorithms implemented are:
 
-- DDPG
+- Deep Deterministic Policy Gradient (DDPG) [link](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
 - TD3
 - SAC
 
@@ -81,7 +81,9 @@ An example of the `<configuration file>` can be seen [here](https://github.com/i
 
 This repositori is part of the Artificial Intelligence methods for Underwater target Tracking (AIforUTracking) project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
 
-**Acknowledgements** - Anyone using DRLforUTracking data for a publication or project acknowledges and references this [forthcoming] publication.
+**Acknowledgements** 
+
+Anyone using DRLforUTracking data for a publication or project acknowledges and references this [forthcoming] publication.
 
 
 <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mscacolor.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/euflag.png" width="121" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/logos_poc_aei_2021.jpg" width="393" height="75"/>
