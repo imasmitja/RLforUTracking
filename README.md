@@ -1,11 +1,11 @@
-# Deep Reinforcement Learning for Underwater target Tracking (RLforUTracking)
+# Deep Reinforcement Learning methods for Underwater target Tracking (RLforUTracking)
 This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
 The Deep Reinforcement Learning (RL) algorithms implemented are:
 
 - Deep Deterministic Policy Gradient ([DDPG](https://spinningup.openai.com/en/latest/algorithms/ddpg.html))
-- TD3
-- SAC
+- Twin-Delayed DDPG ([TD3](https://spinningup.openai.com/en/latest/algorithms/td3.html))
+- Soft Actor-Critic ([SAC](https://spinningup.openai.com/en/latest/algorithms/sac.html))
 
 The environment to train the agents is based on the OpenAI Particle [link](https://github.com/openai/multiagent-particle-envs).
 
