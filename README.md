@@ -1,5 +1,5 @@
-# Deep Reinforcement Learning methods for Underwater target Tracking (RLforUTracking) 
-<img src="https://github.com/imasmitja/RLforUTracking/blob/main/logos/RLforUTracking_logo.PNG" width="323" height="248"/>
+# Deep Reinforcement Learning methods for Underwater target Tracking
+<img src="https://github.com/imasmitja/RLforUTracking/blob/main/logos/RLforUTracking_logo.PNG" width="291" height="224"/>
 
 This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
