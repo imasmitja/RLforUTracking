@@ -84,7 +84,11 @@ This repositori is part of the Artificial Intelligence methods for Underwater ta
 **Acknowledgements** - Anyone using DRLforUTracking data for a publication or project acknowledges and references this [forthcoming] publication.
 
 
-<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/mscacolor.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/euflag.png" width="121" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos_poc_aei_2021.jpg" width="393" height="75"/>
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mscacolor.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/euflag.png" width="121" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/logos_poc_aei_2021.jpg" width="393" height="75"/>
 
 <sub><sup>“This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 893089.”</sup></sub>
 
+
+**Collaborators**
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/icm.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mbari.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/udg.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/upc.png" width="235" height="75"/> 
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/bsc.png" width="235" height="75"/>
