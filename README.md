@@ -76,7 +76,7 @@ $ python see_trained_agent.py <configuration file>
 
 Note: `<configuration file>` without extension
 
-An example of the `<configuration file>` can be seen [here](https://github.com/imasmitja/DRL4AUV/blob/main/test_configuration.txt)
+An example of the `<configuration file>` can be found [here](https://github.com/imasmitja/DRL4AUV/blob/main/test_configuration.txt)
   
 ## Additional information
 
