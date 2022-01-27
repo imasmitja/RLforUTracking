@@ -90,5 +90,5 @@ This repositori is part of the Artificial Intelligence methods for Underwater ta
 
 
 **Collaborators**
-<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/icm.png" width="107" height="70"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mbari.png" width="193" height="65"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/udg.png" width="101" height="70"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/upc.jpg" width="309" height="70"/> 
-<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/bsc.jpg" width="260" height="70"/>
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/icm.png" width="107" height="70"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mbari.png" width="193" height="65"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/udg.png" width="101" height="70"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/upc.png" width="119" height="70"/> 
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/bsc.jpg" width="70" height="70"/>
