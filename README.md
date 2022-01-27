@@ -9,7 +9,7 @@ The Deep Reinforcement Learning (RL) algorithms implemented are:
 
 The environment to train the agents is based on the OpenAI Particle [link](https://github.com/openai/multiagent-particle-envs).
 
-The main objective is to find the optimal path that an autonomous vehicle (e.g. autonomous underwater vehicles (AUV) or autonomous surface vehicles (ASV)) should follow in order to localize and track an underwater target using range-only and single-beacon algorithms. The target estimation algorithms implemented are based on:
+The main objective is to find the optimal path that an autonomous vehicle (e.g. autonomous underwater vehicles (AUV) or autonomous surface vehicles (ASV)) should follow in order to localize and track an underwater target using [range-only and single-beacon algorithms](https://journals.sagepub.com/doi/10.1177/0278364918802351). The target estimation algorithms implemented are based on:
 
 - Least Squares (LS)
 - Particle Filterse (PF)
