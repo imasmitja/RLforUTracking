@@ -88,3 +88,7 @@ This repositori is part of the Artificial Intelligence methods for Underwater ta
 
 <sub><sup>“This project has received funding from the European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 893089.”</sup></sub>
 
+
+**Collaborators**
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/icm.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/mbari.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/udg.png" width="235" height="75"/> <img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/upc.png" width="235" height="75"/> 
+<img src="https://github.com/imasmitja/DRLforUTracking/blob/main/logos/bsc.png" width="235" height="75"/>
