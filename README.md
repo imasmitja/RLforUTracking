@@ -3,7 +3,7 @@ This is a set of tools developed to train an agen (and multiple agents) to find 
 
 The Deep Reinforcement Learning (RL) algorithms implemented are:
 
-- Deep Deterministic Policy Gradient (DDPG) [link](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
+- Deep Deterministic Policy Gradient ([DDPG](https://spinningup.openai.com/en/latest/algorithms/ddpg.html))
 - TD3
 - SAC
 
