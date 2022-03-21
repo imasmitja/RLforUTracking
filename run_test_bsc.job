@@ -23,6 +23,6 @@ module load szip/2.1.1
 module load ffmpeg/4.2.1
 module load opencv/4.1.1
 module load python/3.7.4_ML
-python main.py
+python main.py ${1}
 # This is a first example to run a .py in BSC servers
 
