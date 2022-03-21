@@ -68,6 +68,8 @@ class Scenario(BaseScenario):
             agent.state.p_vel = np.zeros(world.dim_p)
             agent.state.p_vel_old = np.zeros(world.dim_p)
             agent.state.c = np.zeros(world.dim_c)
+            
+            
         for i, landmark in enumerate(world.landmarks):
             if i < world.num_landmarks:
                 dis = np.random.uniform(0.04, 1.)
@@ -79,6 +81,9 @@ class Scenario(BaseScenario):
                 landmark.state.p_vel = np.zeros(world.dim_p)
         #Initailize the landmark estimated positions
         world.landmarks_estimated = [Target() for i in range(world.num_landmarks)]
+        
+        #take a random direction
+        self.ra = (np.random.rand(1)*np.pi*2.).item(0) #initial landmark direction
         
         #benchmark variables
         self.agent_outofworld = 0

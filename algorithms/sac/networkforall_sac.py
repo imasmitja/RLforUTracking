@@ -68,6 +68,20 @@ class Network(nn.Module):
         
     def reset_parameters(self):
         if self.actor == True:
+            if self.rnn_active:
+                #method 1: (from https://discuss.pytorch.org/t/initializing-parameters-of-a-multi-layer-lstm/5791)
+                for name, param in self.rnn.named_parameters():
+                  if 'bias' in name:
+                     nn.init.constant_(param, 0.0)
+                  elif 'weight' in name:
+                     nn.init.xavier_normal_(param)
+                     
+                # #method 2:
+                # for layer_p in self.rnn._all_weights:
+                #     for p in layer_p:
+                #         if 'weight' in p:
+                #             nn.init.normal_(self.rnn.__getattr__(p), 0.0, 0.02)
+                            
             # self.rnn.weight.data.uniform_(*hidden_init(self.rnn))
             self.fc0.weight.data.uniform_(*hidden_init(self.fc0))
             self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
@@ -75,12 +89,40 @@ class Network(nn.Module):
             self.fc_sigma.weight.data.uniform_(*hidden_init(self.fc_sigma))
         else:
             #Q1
-            # self.rnn_q1.weight.data.uniform_(*hidden_init(self.rnn_q1))
+            if self.rnn_active:
+                #method 1: (from https://discuss.pytorch.org/t/initializing-parameters-of-a-multi-layer-lstm/5791)
+                for name, param in self.rnn_q1.named_parameters():
+                  if 'bias' in name:
+                     nn.init.constant_(param, 0.0)
+                  elif 'weight' in name:
+                     nn.init.xavier_normal_(param)
+                     
+                # #method 2:
+                # for layer_p in self.rnn_q1._all_weights:
+                #     for p in layer_p:
+                #         if 'weight' in p:
+                #             nn.init.normal_(self.rnn_q1.__getattr__(p), 0.0, 0.02)
+                            
+            # self.rnn.weight.data.uniform_(*hidden_init(self.rnn_q1))
             self.fc0_q1.weight.data.uniform_(*hidden_init(self.fc0_q1))
             self.fc1_q1.weight.data.uniform_(*hidden_init(self.fc1_q1))
             self.fc2_q1.weight.data.uniform_(*hidden_init(self.fc2_q1))
             #Q2
-            # self.rnn_q2.weight.data.uniform_(*hidden_init(self.rnn_q2))
+            if self.rnn_active:
+                #method 1: (from https://discuss.pytorch.org/t/initializing-parameters-of-a-multi-layer-lstm/5791)
+                for name, param in self.rnn.named_parameters():
+                  if 'bias' in name:
+                     nn.init.constant_(param, 0.0)
+                  elif 'weight' in name:
+                     nn.init.xavier_normal_(param)
+                     
+                # #method 2:
+                # for layer_p in self.rnn_q2._all_weights:
+                #     for p in layer_p:
+                #         if 'weight' in p:
+                #             nn.init.normal_(self.rnn_q2.__getattr__(p), 0.0, 0.02)
+                            
+            # self.rnn.weight.data.uniform_(*hidden_init(self.rnn_q2))
             self.fc0_q2.weight.data.uniform_(*hidden_init(self.fc0_q2))
             self.fc1_q2.weight.data.uniform_(*hidden_init(self.fc1_q2))
             self.fc2_q2.weight.data.uniform_(*hidden_init(self.fc2_q2))

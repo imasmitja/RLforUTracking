@@ -43,7 +43,21 @@ class Network(nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
-        # self.rnn.weight.data.uniform_(*hidden_init(self.rnn))
+        if self.rnn_active:
+                #method 1: (from https://discuss.pytorch.org/t/initializing-parameters-of-a-multi-layer-lstm/5791)
+                for name, param in self.rnn.named_parameters():
+                  if 'bias' in name:
+                     nn.init.constant_(param, 0.0)
+                  elif 'weight' in name:
+                     nn.init.xavier_normal_(param)
+                     
+                # #method 2:
+                # for layer_p in self.rnn._all_weights:
+                #     for p in layer_p:
+                #         if 'weight' in p:
+                #             nn.init.normal_(self.rnn.__getattr__(p), 0.0, 0.02)
+                            
+            # self.rnn.weight.data.uniform_(*hidden_init(self.rnn))
         self.fc0.weight.data.uniform_(*hidden_init(self.fc0))
         self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
         self.fc2.weight.data.uniform_(*hidden_init(self.fc2))
