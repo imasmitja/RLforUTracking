@@ -12,8 +12,8 @@ https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/sac.py
 '''
 
 from algorithms.sac.networkforall_sac import Network
-from utilities.utilities import hard_update, gumbel_softmax, onehot_from_logits
-from torch.optim import Adam, AdamW
+from utilities.utilities import hard_update
+from torch.optim import Adam
 import torch
 import numpy as np
 
@@ -86,4 +86,4 @@ class SACAgent():
         else:
             action, log_probs = self.actor.forward(his,obs) 
             action = action.cpu().clamp(-1, 1)
-        return actions.cpu(), log_probs
+        return action.cpu(), log_probs

@@ -85,4 +85,4 @@ class HRSACAgent():
         else:
             action, log_probs = self.actor.forward(his,obs) 
             action = action.cpu().clamp(-1, 1)
-        return actions.cpu(), log_probs
+        return action.cpu(), log_probs

@@ -20,8 +20,10 @@ https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/sac.py
 class MASAC:
     def __init__(self, num_agents = 3, num_landmarks = 1, landmark_depth=15., discount_factor=0.95, tau=0.02, lr_actor=1.0e-2, lr_critic=1.0e-2, weight_decay=1.0e-5, device = 'cpu', rnn = True, alpha = 0.2, automatic_entropy_tuning = True, dim_1=64, dim_2=32):
         super(MASAC, self).__init__()
+        
+        # ([agent.state.p_vel] + [agent.state.p_pos] + entity_pos + other_pos + [entity_range] + [entity_depth] + [agent.state.p_pos_origin]) + action(for critic not actor)
+        in_actor = 1*2*2 + num_landmarks*2 + (num_agents-1)*2 + num_landmarks + 1*num_landmarks + 2 +1#test with target depth and agent's origin for science
 
-        in_actor = 1*2*2 + num_landmarks*2 + (num_agents-1)*2 + num_landmarks + 1 #all previous tests
         hidden_in_actor = dim_2
         hidden_out_actor = int(hidden_in_actor/2)
         out_actor = 1 #each agent have 2 continuous actions on x-y plane

@@ -236,15 +236,15 @@ class Scenario(BaseScenario):
                 add_pos_error = False
                 if self.pf_method == True:
                     if add_pos_error == True:
-                        world.landmarks_estimated[i].updatePF(dt=0.04, new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0]+np.random.randn(1).item(0)*3/1000.,0.,agent.state.p_pos[1]+np.random.randn(1).item(0)*3/1000.,0.], update=new_range)
+                        world.landmarks_estimated[i].updatePF(dt=30., new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0]+np.random.randn(1).item(0)*3/1000.,0.,agent.state.p_pos[1]+np.random.randn(1).item(0)*3/1000.,0.], update=new_range)
                     else:
-                        world.landmarks_estimated[i].updatePF(dt=0.04, new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0],0.,agent.state.p_pos[1],0.], update=new_range)
+                        world.landmarks_estimated[i].updatePF(dt=30., new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0],0.,agent.state.p_pos[1],0.], update=new_range)
                 else:
                     #2b: Update the LS
                     if add_pos_error == True:
                         world.landmarks_estimated[i].updateLS(dt=0.04, new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0]+np.random.randn(1).item(0)*3/1000.,0.,agent.state.p_pos[1]+np.random.randn(1).item(0)*3/1000.,0.])
                     else:
-                        world.landmarks_estimated[i].updateLS(dt=0.04, new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0],0.,agent.state.p_pos[1],0.])
+                        world.landmarks_estimated[i].updateLS(dt=30., new_range=new_range, z=slant_range, myobserver=[agent.state.p_pos[0],0.,agent.state.p_pos[1],0.])
                 # Traditional plot
                 # import matplotlib.pyplot as plt
                 # plt.figure(figsize=(5,5))

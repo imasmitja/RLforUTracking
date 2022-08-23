@@ -4,12 +4,12 @@
 # HYPERPARAMETERS
 ##################################################################
 #Replay buffer size: int(1e6) 
-BUFFER_SIZE = 500000 
+BUFFER_SIZE = 1000000 
 #Mini batch size: 512  
 BATCH_SIZE = 32
 #Discount factor: 0.95            
 GAMMA = 0.99
-#For soft update of target parameters          
+#Soft update of target parameters          
 TAU = 0.01
 #Learning rate of the actor      
 LR_ACTOR = 1e-3
@@ -23,6 +23,9 @@ UPDATE_EVERY = 30
 UPDATE_TIMES = 20
 #Seed for random numbers       
 SEED = 3 
+#Number of training episodes
+number_of_episodes = 2000000
+episode_length = 200
 
 #Amplitude of OU noise
 #This slowly decreases to 0
@@ -30,10 +33,20 @@ SEED = 3
 noise = 0.5 
 noise_reduction = 0.9999
 
+#REWARD FUNCTION THRESHOLDS
+rew_err_th = 0.003
+rew_dis_th = 0.3
+
+#Experienced replay buffer activation
+EXP_REP_BUF = False
+
+#Uniform random steps at the begining as suggested by https://spinningup.openai.com/en/latest/algorithms/ddpg.html
+START_STEPS = 10000 
+
 ##################################################################
 # PRETRINED NETWORK
 ##################################################################
-#Use a previouse trained network as imput weights    
+#Use a previously trained network as weights' imput    
 PRE_TRAINED = False   
 PRE_TRAINED_EP = 0
 
@@ -44,27 +57,37 @@ PRE_TRAINED_EP = 0
 #Scenario used to train the networks
 SCENARIO = tracking
 
-
-#Number of parallel agents
+#Number of parallel environments
 parallel_envs = 8
 #Number of agents per environment
 num_agents = 1
 #Number of landmarks (or targets) per environment
 num_landmarks = 1
-#Depth of each landmark (in metres)
-landmark_depth = 15.0
+
+#TARGET PARAMETERS
 landmark_movable = True
 movement = linear
-pf_method = True
-rew_err_th = 0.0003
-rew_dis_th = 0.3
-#Number of training episodes.
-#Change this to higher number to experiment. say 30000.
-number_of_episodes = 4000000
-episode_length = 200
+#movement = levy
+#movement = random
+random_vel = True
+#velocities in km/s
+landmark_vel = 0.0006
+max_vel = 0.0006
 
-#Experienced replay buffer activation
-EXP_REP_BUF = False
+#Depth of each landmark (in metres). It will be a random depth between 15m and landmark_depth.
+landmark_depth = 300.0
+
+#TARGET ESTIMATION METHOD (LS by default if not PF)
+pf_method = False
+
+#ENVIRONMENT PARAMETERS
+#range dropping (to simulate missing communications between agents and landmarks)
+range_dropping = 0.1
+#maximum range at a distance measurement can be conducted
+max_range = 0.9
+#sea current velocity (0.001 km/s is the velocity of the agent)
+#velocities in km/s
+max_current_vel = 0.0003
 
 ##################################################################
 # NETWORK ARCHITECTURE
@@ -72,14 +95,15 @@ EXP_REP_BUF = False
 #DNN network
 #DNN = MADDPG
 #DNN = MATD3
-DNN = MASAC
+#DNN = MASAC
+DNN = MAHRSAC
 
 #SAC parameters
 ALPHA = 0.05
 AUTOMATIC_ENTROPY = True
 
 #Recurrent neural network
-RNN = False
+RNN = True
 HISTORY_LENGTH = 5
 
 #Number of units per layers
@@ -88,21 +112,18 @@ DIM_1 = 64
 #it was 32 or 128
 DIM_2 = 32 
 
-#Uniform random steps at the begining as suggested by https://spinningup.openai.com/en/latest/algorithms/ddpg.html
-START_STEPS = 10000 
-
 ##################################################################
 # LOG PARAMETERS
 ##################################################################
 #Sliding windows to measure the avarage reward among epochs
-REWARD_WINDOWS = 100000
+REWARD_WINDOWS = 10000
 #Sliding windows to measure the avarage landmark error among epochs 
 LANDMARK_ERROR_WINDOWS = 10000 
 #Sliding windows to emasure the number of collisions and out of world
 COLLISION_OUTWORLD_WINDOWS = 1000 
 
 #In BSC machines the render doesn't work
-RENDER = False 
+RENDER = True 
 
 #If we want to render the progress bar         
 PROGRESS_BAR = True

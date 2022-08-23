@@ -5,9 +5,11 @@ class EntityState(object):
     def __init__(self):
         # physical position
         self.p_pos = None
+        self.p_pos_origin = None
         # physical velocity
         self.p_vel = None
         self.p_vel_old = None
+        self.a_vel = None
 
 # state of agents (including communication and internal/mental state)
 class AgentState(EntityState):
@@ -42,6 +44,7 @@ class Entity(object):
         # max speed and accel
         self.max_speed = None
         self.accel = None
+        self.max_a_speed = None
         # state
         self.state = EntityState()
         # mass
@@ -59,6 +62,10 @@ class Landmark(Entity):
         self.action = Action()
         # physical motor noise amount
         self.u_noise = None
+        # velocity,direction,depth
+        self.landmark_vel = 0.
+        self.ra = 0.
+        self.landmark_depth = 0.
 
 # properties of agent entities
 class Agent(Entity):
@@ -96,8 +103,9 @@ class World(object):
         self.dim_p = 2
         # color dimensionality
         self.dim_color = 3
-        # simulation timestep
+        # simulation timestep (in seconds)
         self.dt = 0.1
+        self.dt = 30
         # physical damping
         self.damping = 0.25
         # contact response parameters
@@ -108,6 +116,9 @@ class World(object):
         self.num_landmarks = 3
         self.collaborative = True
         self.angle = []
+        # sea currents
+        self.vel_ocean_current = 0.
+        self.angle_ocean_current = 0.
 
     # return all entities in the world
     @property
@@ -200,12 +211,18 @@ class World(object):
                         self.angle[i] += np.pi*2
                 #The second position of p_vel is the liniar velocity of the agent
                 # vel = entity.state.p_vel[1]+0.
-                vel = 0.3 #seting this velocity (0.1) and considering that the dt is equal to 0.1, means that we have a new position each 10m.
+                vel = 0.001 #seting this velocity (0.1) and considering that the dt is equal to 0.1, means that we have a new position each 10m.
                 if vel < 0:
                     vel = 0
                 #Finally, we increase the position (aka the agent) using the new angle and velocity.
                 entity.state.p_pos += np.array([vel*np.cos(self.angle[i]),vel*np.sin(self.angle[i])]) * self.dt
                 entity.state.p_vel = np.array([vel*np.cos(self.angle[i]),vel*np.sin(self.angle[i])])               
+                ocean_current = True
+                if ocean_current == True:
+                    entity.state.p_pos += np.array([self.vel_ocean_current*np.cos(self.angle_ocean_current),self.vel_ocean_current*np.sin(self.angle_ocean_current)]) * self.dt
+                    # we don't need to modify the vel of the agent, in that way, we conserve its real direction. And not the direction of the current,
+                    # with can be extrapolated from the position of the agent, its next position, and its direction.
+                    # entity.state.p_vel += np.array([self.vel_ocean_current*np.cos(self.angle_ocean_current),self.vel_ocean_current*np.sin(self.angle_ocean_current)]) 
                 
     def update_agent_state(self, agent):
         # set communication state (directly for now)
