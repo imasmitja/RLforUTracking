@@ -36,7 +36,7 @@ pip install gym==0.10.0
 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
 pip install tensorflow==2.1.0
 pip install tensorboardX
-pip install imageio
+pip install imageio --user
 pip install progressbar
 pip install pyglet==1.3.2
 pip install cloudpickle
