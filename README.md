@@ -3,7 +3,7 @@
 
 This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
-The Deep Reinforcement Learning (RL) algorithms implemented are:
+The deep Reinforcement Learning (RL) algorithms implemented are:
 
 - Deep Deterministic Policy Gradient ([DDPG](https://spinningup.openai.com/en/latest/algorithms/ddpg.html))
 - Twin-Delayed DDPG ([TD3](https://spinningup.openai.com/en/latest/algorithms/td3.html))
@@ -50,13 +50,13 @@ $ git clone https://github.com/imasmitja/DRLforUTracking
 ```
 
 ## Execution Instructions
-Train the DRL network:
+Train the deep RL network:
 
 ```
 $ python main.py <configuration file>
 ```
 
-While the DRL is training you can visualize the polots on tensorBoard by:
+While the DRL is training you can visualize the plots on TensorBoard by:
 
 ```
 $ tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
