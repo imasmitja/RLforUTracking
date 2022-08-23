@@ -11,7 +11,7 @@ https://github.com/pranz24/pytorch-soft-actor-critic/blob/master/sac.py
 
 '''
 
-from algorithms.sac.networkforall_sac import Network
+from algorithms.hrsac.networkforall_hrsac import Network
 from utilities.utilities import hard_update, gumbel_softmax, onehot_from_logits
 from torch.optim import Adam, AdamW
 import torch
@@ -24,15 +24,15 @@ from utilities.OUNoise import OUNoise
 #device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = 'cpu'
 
-class SACAgent():
+class HRSACAgent():
     def __init__(self, in_actor, hidden_in_actor, hidden_out_actor, out_actor, in_critic, hidden_in_critic, hidden_out_critic, rnn_num_layers, rnn_hidden_size_actor, rnn_hidden_size_critic , lr_actor=1.0e-2, lr_critic=1.0e-2, weight_decay=1.0e-5, device = 'cpu', rnn = True, alpha = 0.2, automatic_entropy_tuning = True):
-        super(SACAgent, self).__init__()
+        super(HRSACAgent, self).__init__()
 
         self.actor = Network(in_actor, hidden_in_actor, hidden_out_actor, out_actor, rnn_num_layers, rnn_hidden_size_actor, device,actor=True, rnn = rnn).to(device)
         self.critic = Network(in_critic, hidden_in_critic, hidden_out_critic, 1, rnn_num_layers, rnn_hidden_size_critic, device, rnn = rnn).to(device)
         # self.target_actor = Network(in_actor, hidden_in_actor, hidden_out_actor, out_actor, rnn_num_layers, rnn_hidden_size_actor, device, actor=True, rnn = rnn).to(device)
         self.target_critic = Network(in_critic, hidden_in_critic, hidden_out_critic, 1, rnn_num_layers, rnn_hidden_size_critic, device, rnn = rnn).to(device)
-
+        
         self.noise = OUNoise(out_actor, scale=1.0 )
         self.device = device
         
@@ -69,7 +69,6 @@ class SACAgent():
         else:
             action, _ = self.actor.forward(his,obs) 
             action = action.cpu().clamp(-1, 1)
-        # actions.cpu().detach().numpy()[0]
         return action.cpu()
     
 

@@ -7,6 +7,7 @@ from utilities.buffer import ReplayBuffer, ReplayBuffer_SummTree
 from algorithms.ddpg.maddpg import MADDPG
 from algorithms.td3.matd3_bc import MATD3_BC
 from algorithms.sac.masac import MASAC
+from algorithms.hrsac.mahrsac import MAHRSAC
 import torch
 import numpy as np
 from tensorboardX import SummaryWriter
@@ -91,10 +92,15 @@ def main():
     num_landmarks  = config.getint('hyperparam','num_landmarks')
     landmark_depth = config.getfloat('hyperparam','landmark_depth')
     landmark_movable = config.getboolean('hyperparam','landmark_movable')
+    landmark_vel     = config.getfloat('hyperparam','landmark_vel')
     movement         = config.get('hyperparam','movement')
     pf_method        = config.getboolean('hyperparam','pf_method')
     rew_err_th       = config.getfloat('hyperparam','rew_err_th')
     rew_dis_th       = config.getfloat('hyperparam','rew_dis_th')
+    max_range        = config.getfloat('hyperparam','max_range')
+    max_current_vel  = config.getfloat('hyperparam','max_current_vel')
+    range_dropping  = config.getfloat('hyperparam','range_dropping')
+    
     # number of training episodes.
     # change this to higher number to experiment. say 30000.
     number_of_episodes = config.getint('hyperparam','number_of_episodes')
@@ -106,147 +112,20 @@ def main():
     noise          = config.getfloat('hyperparam','noise')
     noise_reduction= config.getfloat('hyperparam','noise_reduction')    
     fol_in = int(np.random.rand()*1000)
+    try:
+        max_vel   = config.getfloat('hyperparam','max_vel')
+        random_vel= config.getboolean('hyperparam','random_vel')
+    except:
+        print('no max_vel or random_vel found in config file')
+        max_vel = 0.
+        random_vel = False
     
     #Chose device
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu") #To run the pytorch tensors on cuda GPU
     #DEVICE = 'cpu'
-    
-# ##################################################################################################
-# import envs
-# from buffer import ReplayBuffer, ReplayBuffer_SummTree
-# from maddpg import MADDPG
-# from matd3_bc import MATD3_BC
-# from masac import MASAC
-# import torch
-# import numpy as np
-# from tensorboardX import SummaryWriter
-# import os
-# from utilities import transpose_list, transpose_to_tensor
-# import time
-# import copy
-# import random
-# import pickle
-# import sys
 
-
-# # for saving gif
-# import imageio
-
-# BUFFER_SIZE =   500000   # int(1e6) # Replay buffer size
-# BATCH_SIZE  =   32      # 512      # Mini batch size
-# GAMMA       =   0.99     # 0.95     # Discount factor
-# TAU         =   0.01     # For soft update of target parameters 
-# LR_ACTOR    =   1e-3     # Learning rate of the actor
-# LR_CRITIC   =   1e-4     # Learning rate of the critic
-# WEIGHT_DECAY =  0        # 1e-5     # L2 weight decay
-# UPDATE_EVERY =  30       # How many steps to take before updating target networks
-# UPDATE_TIMES =  20       # Number of times we update the networks
-# SEED = 3                 # Seed for random numbers
-# BENCHMARK   =   True
-# EXP_REP_BUF =   False    # Experienced replay buffer activation
-# PRE_TRAINED =   False    # Use a previouse trained network as imput weights
-# PRE_TRAINED_EP = 0
-# #Scenario used to train the networks
-# # SCENARIO    =   "simple_spread_ivan" 
-# SCENARIO    =   "simple_track_ivan"
-# # SCENARIO    =   "dynamic_track_ivan(linear)" 
-# # SCENARIO    =   "dynamic_track_ivan"  
-# RENDER = False          #in BSC machines the render doesn't work
-# PROGRESS_BAR = True     #if we want to render the progress bar
-# DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu") #To run the pytorch tensors on cuda GPU
-# # DEVICE = 'cpu'
-# RNN = False
-# HISTORY_LENGTH = 5
-# DNN = 'MADDPG'
-# # DNN = 'MATD3'
-# # DNN = 'MASAC'
-# START_STEPS = 10000 #Uniform random steps at the begining as suggested by https://spinningup.openai.com/en/latest/algorithms/ddpg.html
-# REWARD_WINDOWS = 100000 #Sliding windows to measure the avarage reward among epochs
-# LANDMARK_ERROR_WINDOWS = 10000 #Sliding windows to measure the avarage landmark error among epochs
-# COLLISION_OUTWORLD_WINDOWS = 1000
-# ALPHA = 0.05
-# AUTOMATIC_ENTROPY = False
-# DIM_1 = 64
-# DIM_2 = 32
-
-
-# def seeding(seed=1):
-#     np.random.seed(seed)
-#     torch.manual_seed(seed)
-#     random.seed(seed)
-#     os.environ['PYTHONHASHSEED'] = str(seed)
-#     np.random.seed(seed)#as reproducibility docs
-#     torch.cuda.manual_seed(seed)
-#     torch.cuda.manual_seed_all(seed)
-#     torch.backends.cudnn.benchmark = False# as reproducibility docs
-#     torch.backends.cudnn.deterministic = True# as reproducibility docs
-
-# def pre_process(entity, batchsize):
-#     processed_entity = []
-#     for j in range(3):
-#         list = []
-#         for i in range(batchsize):
-#             b = entity[i][j]
-#             list.append(b)
-#         c = torch.Tensor(list)
-#         processed_entity.append(c)
-#     return processed_entity
-
-
-# def main():
-#     global BATCH_SIZE
-#     global RNN 
-#     global DNN 
-#     global AUTOMATIC_ENTROPY
-#     global ALPHA
-#     global SCENARIO
-    
-#     # Read arguments if its necessary
-#     # python main.py <DNN> <SCENARIO> <AUTOMATIC_ENTROPY> <RNN>
-#     print('sys.argv = ',sys.argv)
-#     if( len( sys.argv ) > 1 ):
-#         DNN = sys.argv[1] 
-#     if( len( sys.argv ) > 2 ):
-#         SCENARIO = sys.argv[2]
-#     if( len( sys.argv ) > 3 ):
-#         AUTOMATIC_ENTROPY = eval(sys.argv[3])
-#         if AUTOMATIC_ENTROPY == True:
-#             ALPHA = 0.05
-#         else:
-#             ALPHA = 0.005
-#     if( len( sys.argv ) > 4 ):
-#         RNN = eval(sys.argv[4])
-#     if( len(sys.argv ) > 5 ):
-#         fol_in = int(sys.argv[5])
-#     else:
-#         fol_in = 0
-    
- 
-#     seeding(seed = SEED+PRE_TRAINED_EP)
-#     # number of parallel agents
-#     parallel_envs = 8
-#     # number of agents per environment
-#     num_agents = 1
-#     # number of landmarks (or targets) per environment
-#     num_landmarks = 1
-#     # number of training episodes.
-#     # change this to higher number to experiment. say 30000.
-#     number_of_episodes = 4000000
-#     episode_length = 200
-#     # how many episodes to save policy and gif
-#     save_interval = 100000
-#     t = 0
-    
-##################################################################################################
-    
-    # amplitude of OU noise
-    # this slowly decreases to 0
-    noise = 0.5 #was 2, try 0.5
-    noise_reduction = 0.9999    
-    
-    # how many episodes before update
-    # episode_per_update = UPDATE_EVERY * parallel_envs
-    # common_folder = time.strftime(r"/logs/%m%d%y_%H%M%S")+'_'+str(fol_in)
+##################################################################################################    
+     
     common_folder = r"/logs/"+configFile
     log_path = os.path.dirname(os.getcwd())+common_folder+r"/log"
     model_dir= os.path.dirname(os.getcwd())+common_folder+r"/model_dir"
@@ -283,6 +162,7 @@ def main():
     print('num_agents           =  ',num_agents)
     print('num_landmarks        =  ',num_landmarks)
     print('landmark_depth       =  ',landmark_depth)
+    print('landmark_velocity    =  ',landmark_vel)
     print('number_of_episodes   =  ',number_of_episodes)
     print('episode_length       =  ',episode_length)
     print('save_interval        =  ',save_interval)
@@ -308,8 +188,8 @@ def main():
     print('Initialize the number of parallel envs in torch')
     torch.set_num_threads(parallel_envs)
     print('Initialize the environments')
-    env = envs.make_parallel_env(parallel_envs, SCENARIO, seed = SEED+PRE_TRAINED_EP, num_agents=num_agents, num_landmarks=num_landmarks, landmark_depth=landmark_depth, landmark_movable=landmark_movable, movement=movement, pf_method=pf_method, rew_err_th=rew_err_th, rew_dis_th=rew_dis_th, benchmark = BENCHMARK)
-       
+    env = envs.make_parallel_env(parallel_envs, SCENARIO, seed = SEED+PRE_TRAINED_EP, num_agents=num_agents, num_landmarks=num_landmarks, landmark_depth=landmark_depth, landmark_movable=landmark_movable, landmark_vel=landmark_vel, max_vel=max_vel, random_vel=random_vel, movement=movement, pf_method=pf_method, rew_err_th=rew_err_th, rew_dis_th=rew_dis_th, max_range=max_range, max_current_vel=max_current_vel,range_dropping=range_dropping, benchmark = BENCHMARK)
+    
     # initialize replay buffer
     if EXP_REP_BUF == False:
         buffer = ReplayBuffer(int(BUFFER_SIZE))
@@ -325,6 +205,9 @@ def main():
             maddpg = MATD3_BC(num_agents = num_agents, num_landmarks = num_landmarks, landmark_depth=landmark_depth, discount_factor=GAMMA, tau=TAU, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC, weight_decay=WEIGHT_DECAY, device = DEVICE, rnn = RNN, dim_1=DIM_1, dim_2=DIM_2)
     elif DNN == 'MASAC':
             maddpg =    MASAC(num_agents = num_agents, num_landmarks = num_landmarks, landmark_depth=landmark_depth, discount_factor=GAMMA, tau=TAU, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC, weight_decay=WEIGHT_DECAY, device = DEVICE, rnn = RNN, alpha = ALPHA, automatic_entropy_tuning = AUTOMATIC_ENTROPY, dim_1=DIM_1, dim_2=DIM_2)
+     elif DNN == 'MAHRSAC':
+            maddpg =    MAHRSAC(num_agents = num_agents, num_landmarks = num_landmarks, landmark_depth=landmark_depth, discount_factor=GAMMA, tau=TAU, lr_actor=LR_ACTOR, lr_critic=LR_CRITIC, weight_decay=WEIGHT_DECAY, device = DEVICE, rnn = RNN, alpha = ALPHA, automatic_entropy_tuning = AUTOMATIC_ENTROPY, dim_1=DIM_1, dim_2=DIM_2)
+    
     else:
         print('ERROR UNKNOWN DNN ARCHITECTURE')
     logger = SummaryWriter(log_dir=log_path)
@@ -347,68 +230,10 @@ def main():
             landmark_collision_episode.append([0]) #we initialize at 0
     
     if PRE_TRAINED == True:
-        # trained_checkpoint = r'E:\Ivan\UPC\UDACITY\DRL_Nanodegree\Part4\MADDPG\032621_224252\model_dir\episode-99000' #test1 6 agents
-        # trained_checkpoint = r'E:\Ivan\UPC\UDACITY\DRL_Nanodegree\Part4\MADDPG\032821_102717\model_dir\episode-99000' #test2 6 agents + pretrined from previous
-        # trained_checkpoint = r'E:\Ivan\UPC\UDACITY\DRL_Nanodegree\Part4\MADDPG\032921_160324\model_dir\episode-99000' #test3 6 agents pre-pretrined
-        # trained_checkpoint = r'E:\Ivan\UPC\UDACITY\DRL_Nanodegree\Part4\MADDPG\033021_203450\model_dir\episode-98004' #test3 6 agents pre-pre-pretrined
-        # trained_checkpoint = r'E:\Ivan\UPC\UDACITY\DRL_Nanodegree\Part4\MADDPG\040921_222255\model_dir\episode-299994' #Test with slighly reward function modified 300.000 iteration
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\090121_151545\model_dir\episode-350000' #first test with LS with one agent and one landmark (episode_length=35) This works better, it has learned to stay close to the landmark and make small movements to maintain the error.
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\090721_075950\model_dir\episode-100000' # Test 52
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\091021_070417\model_dir\episode-1300000' # Test 55
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\100121_155618\model_dir\episode-1650000' #Test 107
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/100121_155618/model_dir/episode-1650000' #Test 107
-        
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\100721_215722\model_dir\episode-1000000' #Test 115, MADDPG, no LSTM.
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/100721_215722/model_dir/episode-1000000' #Test 115 bsc
-        
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\100721_233716\model_dir\episode-2200000' #Test 116, MADDPG, no LSTM.
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/100721_233716/model_dir/episode-2200000' #Test 116, MADDPG, no LSTM.
-        
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\101221_153942\model_dir\episode-600000' #Test 138 TD3
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101221_230232/model_dir/episode-800000' #Test 142
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101221_232449/model_dir/episode-1200000' #Test 144
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101421_173714/model_dir/episode-1400000' #Test 150
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101421_205416/model_dir/episode-1400000' #Test 150
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101421_225029/model_dir/episode-1200000' #Test 150
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101421_234402/model_dir/episode-800000' #Test 150
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_191424/model_dir/episode' #Test 160
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_192906/model_dir/episode' #Test 161
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_193900/model_dir/episode' #Test 162
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_194932/model_dir/episode' #Test 163
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_195742/model_dir/episode' #Test 170
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_200743/model_dir/episode' #Test 171
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_201521/model_dir/episode' #Test 172
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_202448/model_dir/episode' #Test 173
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_203819/model_dir/episode' #Test 180
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/101821_204757/model_dir/episode' #Test 181
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102121_211303/model_dir/episode' #Test 200
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102121_214352/model_dir/episode' #Test 201
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102121_223057/model_dir/episode' #Test 202
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102121_225147/model_dir/episode' #Test 203
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_033205/model_dir/episode' #Test 210
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_153138/model_dir/episode' #Test 211
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_155005/model_dir/episode' #Test 212
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_161316/model_dir/episode' #Test 213
-        
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_163817/model_dir/episode' #Test 220
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_172215/model_dir/episode' #Test 221
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_192331/model_dir/episode' #Test 221
-        # trained_checkpoint = r'/gpfs/home/bsc22/bsc22887/logs/102221_224939/model_dir/episode' #Test 221
-
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\101821_200743/model_dir/episode' #Test 171
-        # trained_checkpoint = r'E:\Ivan\UPC\GitHub\logs\101821_202448/model_dir/episode' #Test 173
-        
+        #Load the pretrained agent's weights
         trained_checkpoint = model_dir + r'/episode'
-    
         aux = torch.load(trained_checkpoint + '_last.pt')
-        if DNN == 'MASAC':
+        if DNN == 'MASAC' or DNN == 'MAHRSAC':
             with open(trained_checkpoint +  '_target_entropy_last.file', "rb") as f:
                 target_entropy_aux = pickle.load(f)
             with open(trained_checkpoint +  '_log_alpha_last.file', "rb") as f:
@@ -431,7 +256,7 @@ def main():
                 maddpg.matd3_bc_agent[i].target_critic.load_state_dict(aux[i]['target_critic_params'])
                 maddpg.matd3_bc_agent[i].actor_optimizer.load_state_dict(aux[i]['actor_optim_params'])
                 maddpg.matd3_bc_agent[i].critic_optimizer.load_state_dict(aux[i]['critic_optim_params'])
-            elif DNN == 'MASAC':
+            elif DNN == 'MASAC' or DNN == 'MAHRSAC':
                 if AUTOMATIC_ENTROPY:
                     maddpg.masac_agent[i].actor.load_state_dict(aux[i]['actor_params'])
                     maddpg.masac_agent[i].critic.load_state_dict(aux[i]['critic_params'])
@@ -508,7 +333,7 @@ def main():
                 maddpg.maddpg_agent[i].noise.reset()
             elif DNN == 'MATD3':
                 maddpg.matd3_bc_agent[i].noise.reset()
-            elif DNN == 'MASAC':
+            elif DNN == 'MASAC' or DNN == 'MAHRSAC':
                 maddpg.masac_agent[i].noise.reset()
             else:
                 break
@@ -539,7 +364,7 @@ def main():
         frames = []
         tmax = 0
         # next_history = copy.deepcopy(history)       
-        
+        his = []
         if RENDER == True:
             frames.append(env.render('rgb_array'))
     
@@ -586,15 +411,16 @@ def main():
             reward_this_episode += rewards
 
             # Update history buffers
-            # Add obs to the history buffer
-            for n in range(parallel_envs):
-                for m in range(num_agents):
-                    aux = obs[n][m].reshape(1,obs_size)
-                    history[n][m] = np.concatenate((history[n][m],aux),axis=0)
-                    history[n][m] = np.delete(history[n][m],0,0)
-            # Add actions to the history buffer
-            history_a = np.concatenate((history_a,actions_for_env.reshape(parallel_envs,num_agents,1,1)),axis=2)
-            history_a = np.delete(history_a,0,2)
+            if RNN:
+                # Add obs to the history buffer
+                for n in range(parallel_envs):
+                    for m in range(num_agents):
+                        aux = obs[n][m].reshape(1,obs_size)
+                        history[n][m] = np.concatenate((history[n][m],aux),axis=0)
+                        history[n][m] = np.delete(history[n][m],0,0)
+                # Add actions to the history buffer
+                history_a = np.concatenate((history_a,actions_for_env.reshape(parallel_envs,num_agents,1,1)),axis=2)
+                history_a = np.delete(history_a,0,2)
                     
             # obs, obs_full = next_obs, next_obs_full
             obs = next_obs
@@ -704,7 +530,7 @@ def main():
                     if PROGRESS_BAR == True:
                         timer_bar.set_postfix({'avg_rew': avg_rew})
                          
-        if counter > 200000:
+        if counter > 400000:
             #increase batch_size as:https://arxiv.org/pdf/1711.00489.pdf
             print('batch_size_was=',BATCH_SIZE)
             BATCH_SIZE *= 2
@@ -742,7 +568,7 @@ def main():
                              'critic_params' : maddpg.matd3_bc_agent[i].critic.state_dict(),
                              'target_critic_params' : maddpg.matd3_bc_agent[i].target_critic.state_dict(),
                              'critic_optim_params' : maddpg.matd3_bc_agent[i].critic_optimizer.state_dict()}
-                elif DNN == 'MASAC':
+                elif DNN == 'MASAC' or DNN == 'MAHRSAC':
                     if AUTOMATIC_ENTROPY:
                         save_dict = {'actor_params' : maddpg.masac_agent[i].actor.state_dict(),
                                  'actor_optim_params': maddpg.masac_agent[i].actor_optimizer.state_dict(),
