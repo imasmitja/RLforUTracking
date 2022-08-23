@@ -49,7 +49,7 @@ def main():
     if( len( sys.argv ) > 1 ):
         configFile = sys.argv[1]
     else:
-        configFile = 'test_configuration'
+        configFile = 'test_configuration_ma'
     print ('Configuration File   =  ',configFile +'.txt')
     
     config = ConfigParser()
