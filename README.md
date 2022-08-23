@@ -31,6 +31,7 @@ conda create -n <env-name> python=3.6
 conda activate <env-name>
 conda install git
 conda install -c conda-forge ffmpeg
+conda install -c conda-forge brotlipy
 pip install gym==0.10.0
 conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
 pip install tensorflow==2.1.0
