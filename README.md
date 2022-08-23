@@ -26,10 +26,13 @@ An example of a trained agent can be seen below.
 ## Environment 
 The designed environment simulates the main characteristics of the marine world, and the acoustic underwater communications channel, such as:
 
-- Ocean currents (Their direction and velocity are randomly chosen at the beginning of each episode based on the configuration file)
-- Distance measurement error (The distance measured between the agent and the target contains a random error of 1 m, and a sistematic error of 1% of the measurement conducted)
-- Agent-Target communication failure (Based on a dropping factor in the configuration file, a number of distance measurements are missed in each episode.)
-- Agent-Target maximum communication distance
+- **Ocean currents** 
+Their direction and velocity are randomly chosen at the beginning of each episode based on the configuration file
+- **Distance measurement error** 
+The distance measured between the agent and the target contains a random error of 1 m, and a sistematic error of 1% of the measurement conducted
+- **Agent-Target communication failure** 
+Based on a dropping factor in the configuration file, a number of distance measurements are missed in each episode.
+- **Agent-Target maximum communication distance**
 
 ## Installation Instructions
 Follow the next instructions to set up a Windows computer to run the algorithms.
