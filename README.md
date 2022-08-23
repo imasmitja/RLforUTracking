@@ -47,7 +47,7 @@ conda install matplotlib
 Then type `git clone`, and paste the project URL, to clone this repository in your local computer.
 
 ```
-git clone https://github.com/imasmitja/DRLforUTracking
+git clone https://github.com/imasmitja/RLforUTracking
 ```
 
 ## Execution Instructions
