@@ -1,7 +1,7 @@
 # Deep Reinforcement Learning methods for Underwater target Tracking
 <img src="https://github.com/imasmitja/RLforUTracking/blob/main/logos/RLforUTracking_logo.PNG" width="262" height="202"/>
 
-This is a set of tools developed to train an agen (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
+This is a set of tools developed to train an agent (and multiple agents) to find the optimal path to localize and track a target (and multiple targets).
 
 The deep Reinforcement Learning (RL) algorithms implemented are:
 
@@ -14,7 +14,7 @@ The environment to train the agents is based on the [OpenAI Particle](https://gi
 The main objective is to find the optimal path that an autonomous vehicle (e.g. autonomous underwater vehicles (AUV) or autonomous surface vehicles (ASV)) should follow in order to localize and track an underwater target using [range-only and single-beacon algorithms](https://journals.sagepub.com/doi/10.1177/0278364918802351). The target estimation algorithms implemented are based on:
 
 - Least Squares (LS)
-- Particle Filterse (PF)
+- Particle Filter (PF)
 
 An example of a trained agent can be seen below.
 
@@ -22,6 +22,14 @@ An example of a trained agent can be seen below.
 | --- | --- |
 
 <sup><sub>Legend: Blue dot = agent, Black dot = target, and Red dot = predicted target position using LS</sup></sub>
+
+## Environment 
+The designed environment simulates the main characteristics of the marine world, and the acoustic underwater communications channel, such as:
+
+- Ocean currents
+- Distance measurement error
+- Agent-Target communication failure
+- Agent-Target maximum communication distance
 
 ## Installation Instructions
 Follow the next instructions to set up a Windows computer to run the algorithms.
@@ -51,13 +59,13 @@ git clone https://github.com/imasmitja/RLforUTracking
 ```
 
 ## Execution Instructions
-Train the deep RL network:
+Training the deep RL network:
 
 ```
 python main.py <configuration file>
 ```
 
-While the DRL is training you can visualize the plots on TensorBoard by:
+While the DRL is training, you can visualize the plots on TensorBoard by:
 
 ```
 tensorboard --logdir=./log/<configuration file> --host=127.0.0.1
@@ -82,7 +90,7 @@ An example of the `<configuration file>` can be found [here](https://github.com/
 ## Additional information
 
 
-This repositori is part of the **Artificial Intelligence methods for Underwater target Tracking (AIforUTracking)** project (ID: 893089) from a Marie Sklodowska-Curie Indvidual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
+This repository is part of the **Artificial Intelligence methods for Underwater target Tracking (AIforUTracking)** project (ID: 893089) from a Marie Sklodowska-Curie Individual Fellowship. More info can be found [here](https://cordis.europa.eu/project/id/893089).
 
 **Acknowledgements** 
 
